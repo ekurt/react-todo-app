@@ -1,0 +1,3 @@
+.todoList {
+  @apply w-full flex flex-col items-center justify-start shadow-lg text-xl p-0 mt-6;
+}

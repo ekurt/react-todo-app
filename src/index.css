@@ -3,5 +3,50 @@
 @tailwind utilities;
 
 @layer base {
-    
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+  html {
+    background: rgba(108, 117, 125, 1);
+  }
+
+  body {
+    background: linear-gradient(
+      180deg,
+      rgba(170, 170, 170, 1) 0%,
+      rgba(170, 170, 170, 1) 341px,
+      rgba(108, 117, 125, 1) 341px,
+      rgba(108, 117, 125, 1) 100%
+    );
+    font-family: "Roboto", sans-serif;
+  }
+
+  ::selection {
+    background: rgba(190, 130, 255, 1);
+    color: #fff;
+  }
+
+  body::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: linear-gradient(
+      180deg,
+      rgba(170, 170, 170, 1) 0%,
+      rgba(170, 170, 170, 1) 341px,
+      rgba(108, 117, 125, 1) 341px,
+      rgba(108, 117, 125, 1) 100%
+    );
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      rgba(170, 170, 170, 1) 0%,
+      rgba(170, 170, 170, 1) 341px,
+      rgba(108, 117, 125, 1) 341px,
+      rgba(108, 117, 125, 1) 100%
+    );
+  }
 }

@@ -1,0 +1,15 @@
+.todoForm {
+  @apply w-full flex items-center justify-between bg-dark p-5 mt-6;
+}
+
+.form {
+  @apply w-full flex items-center justify-between;
+}
+
+.icon {
+  @apply mr-3;
+}
+
+.input {
+  @apply w-full bg-dark text-white border-0 rounded-none border-b-2 border-b-gray-400 focus:border-b-gray-50 focus-visible:outline-none text-lg py-1 px-0;
+}

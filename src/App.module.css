@@ -1,3 +1,11 @@
 .app {
-    @apply container mx-auto;
+  @apply container mx-auto py-[75px] px-5;
+}
+
+.main {
+  @apply w-full lg:w-1/2 mx-auto flex flex-col min-w-[400px] my-[75px];
+}
+
+.h1 {
+  @apply w-full flex justify-between items-center text-gray-100 tracking-[10px] text-4xl;
 }

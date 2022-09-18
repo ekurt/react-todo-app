@@ -1,0 +1,11 @@
+.todoFooter {
+  @apply w-full flex justify-between items-center p-4 bg-dark text-gray-500 text-base;
+}
+
+.middle {
+  @apply w-1/2 flex justify-evenly items-center;
+}
+
+.active {
+  color: rgb(45, 194, 255);
+}

@@ -1,0 +1,22 @@
+.todo {
+  @apply w-full flex justify-start items-center text-gray-400 border-b-2 border-b-gray-600 bg-dark p-4;
+}
+
+.todoItem {
+    @apply w-full
+}
+
+.done {
+  text-decoration-color: rgba(45, 194, 255, 1) !important;
+  text-decoration-line: line-through !important;
+  text-decoration-style: wavy !important;
+  text-decoration-thickness: 5px !important;
+}
+
+.check {
+  @apply mr-3;
+}
+
+.times {
+  @apply text-gray-400 hover:text-gray-300;
+}
