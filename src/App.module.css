@@ -1,9 +1,9 @@
 .app {
-  @apply container mx-auto py-[75px] px-5;
+  @apply container mx-auto py-[50px] px-5;
 }
 
 .main {
-  @apply w-full lg:w-1/2 mx-auto flex flex-col min-w-[400px] my-[75px];
+  @apply w-full lg:w-1/2 mx-auto flex flex-col my-[10px];
 }
 
 .h1 {

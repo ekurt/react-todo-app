@@ -9,7 +9,9 @@ function App() {
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
   );
+
   const [todo, setTodo] = useState("");
+  const [filter, setFilter] = useState(null);
 
   useEffect(() => {
     const storageTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -70,7 +72,7 @@ function App() {
         <h1 className={styles.h1}>
           TODO
           <small>
-            <FaSun />
+            {/* <FaSun /> */}
           </small>
         </h1>
 
@@ -80,10 +82,13 @@ function App() {
           todo={todo}
         />
         <TodoList
+          todo={todo}
           todos={todos}
           doneHandle={doneHandle}
           deleteHandle={deleteHandle}
           deleteCompletedHandle={deleteCompletedHandle}
+          filter={filter}
+          setFilter={setFilter}
         />
       </div>
     </div>

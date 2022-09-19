@@ -1,5 +1,5 @@
 .todoForm {
-  @apply w-full flex items-center justify-between bg-dark p-5 mt-6;
+  @apply w-full flex items-center justify-between bg-dark py-5 px-4 mt-6;
 }
 
 .form {

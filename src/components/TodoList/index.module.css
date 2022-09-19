@@ -1,3 +1,19 @@
 .todoList {
   @apply w-full flex flex-col items-center justify-start shadow-lg text-xl p-0 mt-6;
 }
+
+.todo {
+  @apply w-full min-h-[64px] flex justify-start items-center text-gray-400 border-b-2 border-b-gray-600 bg-dark p-4;
+}
+
+.todoItem {
+  @apply w-full flex justify-center items-center;
+}
+
+.todoItemTemp {
+  @apply w-full flex justify-start items-center;
+}
+
+.check {
+  @apply mr-3 cursor-pointer;
+}

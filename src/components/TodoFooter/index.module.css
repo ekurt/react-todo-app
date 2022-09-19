@@ -1,9 +1,9 @@
 .todoFooter {
-  @apply w-full flex justify-between items-center p-4 bg-dark text-gray-500 text-base;
+  @apply w-full flex justify-between items-center px-4  py-5 bg-dark text-gray-500 text-base;
 }
 
 .middle {
-  @apply w-1/2 flex justify-evenly items-center;
+  @apply hidden w-1/2 md:flex justify-evenly items-center;
 }
 
 .active {
@@ -12,4 +12,8 @@
 
 .pointer {
   @apply cursor-pointer;
+}
+
+.bottom {
+  @apply md:hidden w-full flex justify-center items-center bg-dark shadow-2xl text-gray-500 text-base p-4 mt-5 gap-10;
 }
