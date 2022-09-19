@@ -25,13 +25,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npm run start && npm run up",
+    "dev": "vite --port 7362 --open",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "start http://127.0.0.1:7362",
-    "up": "vite --port 7362"
+    "preview": "vite preview --port 5000 --open"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0"

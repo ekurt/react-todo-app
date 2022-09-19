@@ -9,3 +9,7 @@
 .active {
   color: rgb(45, 194, 255);
 }
+
+.pointer {
+  @apply cursor-pointer;
+}

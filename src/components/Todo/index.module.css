@@ -3,7 +3,7 @@
 }
 
 .todoItem {
-    @apply w-full
+  @apply w-full;
 }
 
 .done {
@@ -14,9 +14,9 @@
 }
 
 .check {
-  @apply mr-3;
+  @apply mr-3 cursor-pointer;
 }
 
 .times {
-  @apply text-gray-400 hover:text-gray-300;
+  @apply text-gray-400 hover:text-gray-300 cursor-pointer;
 }
