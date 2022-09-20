@@ -20,13 +20,19 @@ export const TodoList = ({
 
   return (
     <div className={styles.todoList}>
+      <svg width="0" height="0">
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop stopColor="#2ec0ff" offset="0%" />
+          <stop stopColor="#be82ff" offset="60%" />
+        </linearGradient>
+      </svg>
       {temp ? (
         <div className={styles.todo}>
           <FaRegDotCircle
-          size={30}
-          fill={"rgb(190, 130, 255)"}
-          className={styles.check}
-        />
+            size={30}
+            style={{ fill: "url(#gradient)" }}
+            className={styles.check}
+          />
           <span className={styles.todoItemTemp}>{temp}</span>
         </div>
       ) : null}

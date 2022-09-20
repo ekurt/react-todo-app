@@ -17,3 +17,7 @@
 .bottom {
   @apply md:hidden w-full flex justify-center items-center bg-dark shadow-2xl text-gray-500 text-base p-4 mt-5 gap-10;
 }
+
+.disabled {
+  @apply pointer-events-none;
+}

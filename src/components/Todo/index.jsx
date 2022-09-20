@@ -16,17 +16,23 @@ export const Todo = ({ todo, doneHandle, deleteHandle }) => {
 
   return (
     <div className={styles.todo}>
+      <svg width="0" height="0">
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop stopColor="#2ec0ff" offset="0%" />
+          <stop stopColor="#be82ff" offset="60%" />
+        </linearGradient>
+      </svg>
       {todo.done ? (
         <FaCheckCircle
           size={30}
-          fill={"rgb(190, 130, 255)"}
+          style={{ fill: "url(#gradient)" }}
           className={styles.check}
           onClick={clickDoneHandle}
         />
       ) : (
         <FaRegCircle
           size={30}
-          fill={"rgb(190, 130, 255)"}
+          style={{ fill: "url(#gradient)" }}
           className={styles.check}
           onClick={clickDoneHandle}
         />

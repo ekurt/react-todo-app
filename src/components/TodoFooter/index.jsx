@@ -17,59 +17,80 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
     state: "all",
   });
 
+  let activeTodosCount = todoCount;
+  let completedTodosCount = todos.filter((todo) => todo.done).length;
+
   return (
     <>
-    <div className={styles.todoFooter}>
-      <span>{count} items left</span>
-      <div className={styles.middle}>
-        <span
-          onClick={() => {
-            setFilter(null);
-            setActive({
-              state: "all",
-            });
-          }}
-          className={classNames(styles.pointer, { [styles.active]: active.state === "all" })}
-        >
-          All
+      <div className={styles.todoFooter}>
+        <span>
+          {count} {count == 0 || count == 1 ? "item" : "items"} left
         </span>
+        <div className={styles.middle}>
+          <span
+            onClick={() => {
+              setFilter(null);
+              setActive({
+                state: "all",
+              });
+            }}
+            className={classNames(styles.pointer, {
+              [styles.active]: active.state === "all",
+            })}
+          >
+            All
+          </span>
+          <span
+            onClick={() => {
+              setFilter(false);
+              setActive({
+                state: "active",
+              });
+            }}
+            className={classNames(styles.pointer, {
+              [styles.active]: active.state === "active",
+              [styles.disabled]: todos.length === 0 || activeTodosCount === 0,
+            })}
+          >
+            Active
+          </span>
+          <span
+            onClick={() => {
+              setFilter(true);
+              setActive({
+                state: "completed",
+              });
+            }}
+            className={classNames(styles.pointer, {
+              [styles.active]: active.state === "completed",
+              [styles.disabled]:
+                todos.length === 0 || completedTodosCount === 0,
+            })}
+          >
+            Completed
+          </span>
+        </div>
         <span
-          onClick={() => {
-            setFilter(false);
-            setActive({
-              state: "active",
-            });
-          }}
-          className={classNames(styles.pointer, { [styles.active]: active.state === "active" })}
+          onClick={deleteCompletedHandle}
+          className={classNames(styles.pointer, {
+            [styles.disabled]: todos.length === 0 || completedTodosCount === 0,
+          })}
         >
-          Active
-        </span>
-        <span
-          onClick={() => {
-            setFilter(true);
-            setActive({
-              state: "completed",
-            });
-          }}
-          className={classNames(styles.pointer, { [styles.active]: active.state === "completed" })}
-        >
-          Completed
+          Clear Completed
         </span>
       </div>
-      <span onClick={deleteCompletedHandle} className={styles.pointer}>
-        Clear Completed
-      </span>
-    </div>
 
-    <div className={styles.bottom}>
-    <span
+      <div className={styles.bottom}>
+        <span
           onClick={() => {
             setFilter(null);
             setActive({
               state: "all",
             });
           }}
-          className={classNames(styles.pointer, { [styles.active]: active.state === "all" })}
+          className={classNames(styles.pointer, {
+            [styles.active]: active.state === "all",
+          })}
         >
           All
         </span>
@@ -80,7 +101,10 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
               state: "active",
             });
           }}
-          className={classNames(styles.pointer, { [styles.active]: active.state === "active" })}
+          className={classNames(styles.pointer, {
+            [styles.active]: active.state === "active",
+            [styles.disabled]: todos.length === 0 || activeTodosCount === 0,
+          })}
         >
           Active
         </span>
@@ -91,7 +115,10 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
               state: "completed",
             });
           }}
-          className={classNames(styles.pointer, { [styles.active]: active.state === "completed" })}
+          className={classNames(styles.pointer, {
+            [styles.active]: active.state === "completed",
+            [styles.disabled]: todos.length === 0 || completedTodosCount === 0,
+          })}
         >
           Completed
         </span>
