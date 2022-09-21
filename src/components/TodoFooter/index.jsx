@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import styles from "./index.module.css";
 
-export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
+export const TodoFooter = ({
+  todos,
+  deleteCompletedHandle,
+  setFilter,
+  setDragDisabled,
+}) => {
   let link = classNames(styles.pointer, { [styles.active]: todos.done });
 
   const todoCount = todos.filter((todo) => !todo.done).length;
@@ -33,6 +38,7 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
               setActive({
                 state: "all",
               });
+              setDragDisabled(false)
             }}
             className={classNames(styles.pointer, {
               [styles.active]: active.state === "all",
@@ -46,6 +52,7 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
               setActive({
                 state: "active",
               });
+              setDragDisabled(true)
             }}
             className={classNames(styles.pointer, {
               [styles.active]: active.state === "active",
@@ -60,6 +67,7 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
               setActive({
                 state: "completed",
               });
+              setDragDisabled(true)
             }}
             className={classNames(styles.pointer, {
               [styles.active]: active.state === "completed",
@@ -87,6 +95,7 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
             setActive({
               state: "all",
             });
+            setDragDisabled(false)
           }}
           className={classNames(styles.pointer, {
             [styles.active]: active.state === "all",
@@ -100,6 +109,7 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
             setActive({
               state: "active",
             });
+            setDragDisabled(true)
           }}
           className={classNames(styles.pointer, {
             [styles.active]: active.state === "active",
@@ -114,6 +124,7 @@ export const TodoFooter = ({ todos, deleteCompletedHandle, setFilter }) => {
             setActive({
               state: "completed",
             });
+            setDragDisabled(true)
           }}
           className={classNames(styles.pointer, {
             [styles.active]: active.state === "completed",

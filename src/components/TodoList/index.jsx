@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Todo, TodoFooter } from "../";
 import { FaRegDotCircle } from "react-icons/fa";
 import styles from "./index.module.css";
@@ -6,6 +7,7 @@ import styles from "./index.module.css";
 export const TodoList = ({
   todo,
   todos,
+  setTodos,
   doneHandle,
   deleteHandle,
   deleteCompletedHandle,
@@ -13,10 +15,19 @@ export const TodoList = ({
   setFilter,
 }) => {
   const [temp, setTemp] = useState(todo);
+  const [isDragDisabled, setDragDisabled] = useState(false);
 
   useEffect(() => {
     setTemp(todo);
   }, [todo]);
+
+  const handleOnDrugEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(todos);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setTodos(items);
+  };
 
   return (
     <div className={styles.todoList}>
@@ -45,21 +56,51 @@ export const TodoList = ({
         </div>
       ) : null}
 
-      {todos
-        .filter((todo) => (filter !== null ? todo.done === filter : todo))
-        .map((item, index) => (
-          <Todo
-            key={index}
-            todo={item}
-            doneHandle={doneHandle}
-            deleteHandle={deleteHandle}
-          />
-        ))}
+      <DragDropContext onDragEnd={handleOnDrugEnd}>
+        <Droppable droppableId="todos">
+          {(provided) => (
+            <div
+              className="w-full flex flex-col"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {todos
+                .filter((todo) =>
+                  filter !== null ? todo.done === filter : todo
+                )
+                .map((item, index) => (
+                  <Draggable
+                    key={`${item.id}`}
+                    draggableId={`${item.id}`}
+                    index={index}
+                    isDragDisabled={isDragDisabled}
+                  >
+                    {(provided) => (
+                      <div
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <Todo
+                          todo={item}
+                          doneHandle={doneHandle}
+                          deleteHandle={deleteHandle}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
 
       <TodoFooter
         todos={todos}
         deleteCompletedHandle={deleteCompletedHandle}
         setFilter={setFilter}
+        setDragDisabled={setDragDisabled}
       />
     </div>
   );

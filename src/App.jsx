@@ -78,6 +78,7 @@ function App() {
         <TodoList
           todo={todo}
           todos={todos}
+          setTodos={setTodos}
           doneHandle={doneHandle}
           deleteHandle={deleteHandle}
           deleteCompletedHandle={deleteCompletedHandle}
