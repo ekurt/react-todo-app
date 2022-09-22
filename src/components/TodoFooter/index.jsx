@@ -10,20 +10,18 @@ export const TodoFooter = ({
 }) => {
   let link = classNames(styles.pointer, { [styles.active]: todos.done });
 
-  const todoCount = todos.filter((todo) => !todo.done).length;
+  const activeTodosCount = todos.filter((todo) => !todo.done).length;
+  const completedTodosCount = todos.filter((todo) => todo.done).length;
 
-  const [count, setCount] = useState(todoCount);
+  const [count, setCount] = useState(activeTodosCount);
 
   useEffect(() => {
-    setCount(todoCount);
+    setCount(activeTodosCount);
   }, [todos]);
 
   const [active, setActive] = useState({
     state: "all",
   });
-
-  let activeTodosCount = todoCount;
-  let completedTodosCount = todos.filter((todo) => todo.done).length;
 
   return (
     <>
@@ -31,6 +29,7 @@ export const TodoFooter = ({
         <span>
           {count} {count == 0 || count == 1 ? "item" : "items"} left
         </span>
+        
         <div className={styles.middle}>
           <span
             onClick={() => {
@@ -78,6 +77,7 @@ export const TodoFooter = ({
             Completed
           </span>
         </div>
+
         <span
           onClick={deleteCompletedHandle}
           className={classNames(styles.pointer, {

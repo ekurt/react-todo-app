@@ -6,14 +6,6 @@ import styles from "./index.module.css";
 export const Todo = ({ todo, doneHandle, deleteHandle }) => {
   let todoItem = classNames(styles.todoItem, { [styles.done]: todo.done });
 
-  const clickDoneHandle = () => {
-    doneHandle(todo.id);
-  };
-
-  const clickDeleteHandle = () => {
-    deleteHandle(todo.id);
-  };
-
   return (
     <div className={styles.todo}>
       <svg width="0" height="0">
@@ -27,18 +19,18 @@ export const Todo = ({ todo, doneHandle, deleteHandle }) => {
           size={30}
           style={{ fill: "url(#gradient)" }}
           className={styles.check}
-          onClick={clickDoneHandle}
+          onClick={() => doneHandle(todo.id)}
         />
       ) : (
         <FaRegCircle
           size={30}
           style={{ fill: "url(#gradient)" }}
           className={styles.check}
-          onClick={clickDoneHandle}
+          onClick={() => doneHandle(todo.id)}
         />
       )}
       <span className={todoItem}>{todo.todo}</span>
-      <FaTimes onClick={clickDeleteHandle} size={15} className={styles.times} />
+      <FaTimes onClick={() => deleteHandle(todo.id)} size={15} className={styles.times} />
     </div>
   );
 };
