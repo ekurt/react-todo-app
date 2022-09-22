@@ -45,15 +45,17 @@ function App() {
 
   const doneHandle = (id) => {
     setTodos(
-      todos.map((todo) => {
-        if (todo.id == id) {
-          return {
-            ...todo,
-            done: !todo.done,
-          };
-        }
-        return todo;
-      })
+      todos
+        .map((todo) => {
+          if (todo.id == id) {
+            return {
+              ...todo,
+              done: !todo.done,
+            };
+          }
+          return todo;
+        })
+        .sort((a, b) => (a.done > b.done ? 1 : b.done > a.done ? -1 : 0))
     );
   };
 
