@@ -1,0 +1,12 @@
+.active {
+    color: rgb(45, 194, 255);
+  }
+  
+  .pointer {
+    @apply cursor-pointer;
+  }
+  
+  .disabled {
+    @apply pointer-events-none;
+  }
+  

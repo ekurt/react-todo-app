@@ -6,18 +6,14 @@
   @apply hidden w-1/2 md:flex justify-evenly items-center;
 }
 
-.active {
-  color: rgb(45, 194, 255);
+.bottom {
+  @apply md:hidden w-full flex justify-center items-center bg-dark shadow-2xl text-gray-500 text-base p-4 mt-5 gap-10;
 }
 
 .pointer {
   @apply cursor-pointer;
 }
-
-.bottom {
-  @apply md:hidden w-full flex justify-center items-center bg-dark shadow-2xl text-gray-500 text-base p-4 mt-5 gap-10;
-}
-
+  
 .disabled {
   @apply pointer-events-none;
 }

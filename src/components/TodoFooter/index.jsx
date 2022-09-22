@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FooterFilter } from "../";
 import classNames from "classnames";
 import styles from "./index.module.css";
 
@@ -29,54 +30,17 @@ export const TodoFooter = ({
         <span>
           {count} {count == 0 || count == 1 ? "item" : "items"} left
         </span>
-        
-        <div className={styles.middle}>
-          <span
-            onClick={() => {
-              setFilter(null);
-              setActive({
-                state: "all",
-              });
-              setDragDisabled(false)
-            }}
-            className={classNames(styles.pointer, {
-              [styles.active]: active.state === "all",
-            })}
-          >
-            All
-          </span>
-          <span
-            onClick={() => {
-              setFilter(false);
-              setActive({
-                state: "active",
-              });
-              setDragDisabled(true)
-            }}
-            className={classNames(styles.pointer, {
-              [styles.active]: active.state === "active",
-              [styles.disabled]: todos.length === 0 || activeTodosCount === 0,
-            })}
-          >
-            Active
-          </span>
-          <span
-            onClick={() => {
-              setFilter(true);
-              setActive({
-                state: "completed",
-              });
-              setDragDisabled(true)
-            }}
-            className={classNames(styles.pointer, {
-              [styles.active]: active.state === "completed",
-              [styles.disabled]:
-                todos.length === 0 || completedTodosCount === 0,
-            })}
-          >
-            Completed
-          </span>
-        </div>
+
+        <FooterFilter
+          style={styles.middle}
+          todos={todos}
+          active={active}
+          activeTodosCount={activeTodosCount}
+          completedTodosCount={completedTodosCount}
+          setFilter={setFilter}
+          setActive={setActive}
+          setDragDisabled={setDragDisabled}
+        />
 
         <span
           onClick={deleteCompletedHandle}
@@ -88,52 +52,16 @@ export const TodoFooter = ({
         </span>
       </div>
 
-      <div className={styles.bottom}>
-        <span
-          onClick={() => {
-            setFilter(null);
-            setActive({
-              state: "all",
-            });
-            setDragDisabled(false)
-          }}
-          className={classNames(styles.pointer, {
-            [styles.active]: active.state === "all",
-          })}
-        >
-          All
-        </span>
-        <span
-          onClick={() => {
-            setFilter(false);
-            setActive({
-              state: "active",
-            });
-            setDragDisabled(true)
-          }}
-          className={classNames(styles.pointer, {
-            [styles.active]: active.state === "active",
-            [styles.disabled]: todos.length === 0 || activeTodosCount === 0,
-          })}
-        >
-          Active
-        </span>
-        <span
-          onClick={() => {
-            setFilter(true);
-            setActive({
-              state: "completed",
-            });
-            setDragDisabled(true)
-          }}
-          className={classNames(styles.pointer, {
-            [styles.active]: active.state === "completed",
-            [styles.disabled]: todos.length === 0 || completedTodosCount === 0,
-          })}
-        >
-          Completed
-        </span>
-      </div>
+      <FooterFilter
+        style={styles.bottom}
+        todos={todos}
+        active={active}
+        activeTodosCount={activeTodosCount}
+        completedTodosCount={completedTodosCount}
+        setFilter={setFilter}
+        setActive={setActive}
+        setDragDisabled={setDragDisabled}
+      />
     </>
   );
 };
