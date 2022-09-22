@@ -73,7 +73,7 @@ export const TodoList = ({
                     key={`${item.id}`}
                     draggableId={`${item.id}`}
                     index={index}
-                    isDragDisabled={isDragDisabled}
+                    isDragDisabled={isDragDisabled ? isDragDisabled : item.done}
                   >
                     {(provided) => (
                       <div
