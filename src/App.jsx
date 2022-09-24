@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { TodoForm, TodoList } from "./components";
+import { TodoForm, TodoList, Header, Footer } from "./components";
 import styles from "./App.module.css";
 
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 
 function App() {
   const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [
+      {
+        id: Date.now(),
+        todo: "You can set priority by @[0-1-2-3]",
+        done: false,
+        date: new Date().toLocaleString(),
+        priority: 0,
+      },
+    ]
   );
 
   const [todo, setTodo] = useState("");
@@ -75,13 +83,14 @@ function App() {
   return (
     <div className={styles.app}>
       <div className={styles.main}>
-        <h1 className={styles.h1}>TODO</h1>
+        <Header />
 
         <TodoForm
           submitHandle={submitHandle}
           changeHandle={changeHandle}
           todo={todo}
         />
+
         <TodoList
           todo={todo}
           todos={todos}
@@ -93,6 +102,8 @@ function App() {
           setFilter={setFilter}
           priority={priority}
         />
+
+        <Footer />
       </div>
     </div>
   );

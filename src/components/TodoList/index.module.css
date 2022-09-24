@@ -19,7 +19,7 @@
 }
 
 .normal {
-  @apply border-l-4 border-l-blue-500;
+  @apply border-l-4 border-l-blue-600;
 }
 
 .low {
@@ -27,7 +27,7 @@
 }
 
 .medium {
-  @apply border-l-4 border-l-yellow-500;
+  @apply border-l-4 border-l-yellow-600;
 }
 
 .high {

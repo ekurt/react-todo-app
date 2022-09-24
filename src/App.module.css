@@ -5,7 +5,3 @@
 .main {
   @apply w-full lg:w-1/2 mx-auto flex flex-col my-[10px];
 }
-
-.h1 {
-  @apply w-full flex justify-between items-center text-gray-100 tracking-[10px] text-4xl;
-}

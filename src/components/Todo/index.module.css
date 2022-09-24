@@ -7,10 +7,10 @@
 }
 
 .done {
-  text-decoration-color: rgba(45, 194, 255, 1) !important;
-  text-decoration-line: line-through !important;
-  text-decoration-style: wavy !important;
-  text-decoration-thickness: 5px !important;
+  text-decoration-color: rgba(45, 194, 255, 1);
+  text-decoration-line: line-through;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 5px;
 }
 
 .check {
@@ -22,7 +22,7 @@
 }
 
 .normal {
-  @apply border-l-blue-500;
+  @apply border-l-blue-600;
 }
 
 .low {
@@ -30,7 +30,7 @@
 }
 
 .medium {
-  @apply border-l-yellow-500;
+  @apply border-l-yellow-600;
 }
 
 .high {

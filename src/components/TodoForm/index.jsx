@@ -20,7 +20,7 @@ export const TodoForm = ({ submitHandle, changeHandle, todo }) => {
         <input
           type="text"
           className={styles.input}
-          placeholder="Create a new todo . ."
+          placeholder="Create a new todo list . ."
           value={todo}
           onChange={changeHandle}
           autoFocus
