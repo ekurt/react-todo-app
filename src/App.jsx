@@ -18,11 +18,11 @@ function App() {
 
   const submitHandle = (e) => {
     e.preventDefault();
-
+    if (!todo) return;
     setTodos([
       {
         id: Date.now(),
-        todo: todo,
+        todo: todo.trim(),
         done: false,
       },
       ...todos,
