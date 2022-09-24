@@ -17,3 +17,19 @@
 .check {
   @apply mr-3 cursor-pointer;
 }
+
+.normal {
+  @apply border-l-4 border-l-blue-500;
+}
+
+.low {
+  @apply border-l-4 border-l-green-700;
+}
+
+.medium {
+  @apply border-l-4 border-l-yellow-500;
+}
+
+.high {
+  @apply border-l-4 border-l-red-700;
+}

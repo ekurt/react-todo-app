@@ -10,30 +10,42 @@ function App() {
   );
 
   const [todo, setTodo] = useState("");
+  const [priority, setPriority] = useState(0);
   const [filter, setFilter] = useState(null);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+    setPriority(0);
   }, [todos]);
 
   const submitHandle = (e) => {
     e.preventDefault();
+
     if (!todo) return;
+
     setTodos([
       {
         id: Date.now(),
-        todo: todo.trim(),
+        todo: todo,
         done: false,
+        date: new Date().toLocaleString(),
+        priority: priority,
       },
       ...todos,
     ]);
+
     setTodo("");
   };
 
   const changeHandle = (e) => {
     e.preventDefault();
 
-    setTodo(e.target.value);
+    if (/@[0123]+/.test(e.target.value)) {
+      setTodo(e.target.value.replace(/@[0123]+/, ""));
+      setPriority(Number(e.target.value.match(/@[0123]+/)[0].replace("@", "")));
+    } else {
+      setTodo(e.target.value);
+    }
   };
 
   const doneHandle = (id) => {
@@ -79,6 +91,7 @@ function App() {
           deleteCompletedHandle={deleteCompletedHandle}
           filter={filter}
           setFilter={setFilter}
+          priority={priority}
         />
       </div>
     </div>

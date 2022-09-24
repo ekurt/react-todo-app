@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import classNames from "classnames";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Todo, TodoFooter } from "../";
 import { FaRegDotCircle } from "react-icons/fa";
@@ -13,9 +14,18 @@ export const TodoList = ({
   deleteCompletedHandle,
   filter,
   setFilter,
+  priority,
 }) => {
   const [temp, setTemp] = useState(todo);
   const [isDragDisabled, setDragDisabled] = useState(false);
+
+  let todoClass = classNames(
+    styles.todo,
+    { [styles.normal]: priority === 0 },
+    { [styles.low]: priority === 1 },
+    { [styles.medium]: priority === 2 },
+    { [styles.high]: priority === 3 }
+  );
 
   useEffect(() => {
     setTemp(todo);
@@ -37,8 +47,9 @@ export const TodoList = ({
           <stop stopColor="#be82ff" offset="60%" />
         </linearGradient>
       </svg>
+
       {temp ? (
-        <div className={styles.todo}>
+        <div className={todoClass}>
           <FaRegDotCircle
             size={30}
             style={{ fill: "url(#gradient)" }}
