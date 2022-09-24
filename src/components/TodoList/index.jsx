@@ -4,6 +4,8 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Todo, TodoFooter } from "../";
 import { FaRegDotCircle } from "react-icons/fa";
 import styles from "./index.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 export const TodoList = ({
   todo,
@@ -37,6 +39,19 @@ export const TodoList = ({
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setTodos(items);
+  };
+
+  const notify = () => {
+    toast(`📋 Copied to clipboard!`, {
+      position: "top-right",
+      theme: "light",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
@@ -96,6 +111,7 @@ export const TodoList = ({
                           todo={item}
                           doneHandle={doneHandle}
                           deleteHandle={deleteHandle}
+                          notify={notify}
                         />
                       </div>
                     )}
@@ -106,6 +122,8 @@ export const TodoList = ({
           )}
         </Droppable>
       </DragDropContext>
+
+      <ToastContainer />
 
       <TodoFooter
         todos={todos}

@@ -1,5 +1,5 @@
 .app {
-  @apply container mx-auto py-[50px] px-5;
+  @apply container mx-auto py-[50px] px-5 select-none;
 }
 
 .main {

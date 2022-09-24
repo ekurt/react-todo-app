@@ -2,8 +2,9 @@ import React from "react";
 import classNames from "classnames";
 import { FaCheckCircle, FaRegCircle, FaTimes } from "react-icons/fa";
 import styles from "./index.module.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
-export const Todo = ({ todo, doneHandle, deleteHandle }) => {
+export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
   let todoItem = classNames(styles.todoItem, { [styles.done]: todo.done });
   let todoClass = classNames(
     styles.todo,
@@ -36,7 +37,9 @@ export const Todo = ({ todo, doneHandle, deleteHandle }) => {
           onClick={() => doneHandle(todo.id)}
         />
       )}
-      <span className={todoItem}>{todo.todo}</span>
+      <CopyToClipboard text={todo.todo} onCopy={notify}>
+        <span className={todoItem}>{todo.todo}</span>
+      </CopyToClipboard>
       <FaTimes
         onClick={() => deleteHandle(todo.id)}
         size={15}

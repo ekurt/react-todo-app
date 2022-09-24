@@ -8,11 +8,39 @@ function App() {
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [
       {
-        id: Date.now(),
-        todo: "You can set priority by @[0-1-2-3]",
+        id: Date.now() + 1,
+        todo: "📋 You can copy todo by press on it",
         done: false,
         date: new Date().toLocaleString(),
         priority: 0,
+      },
+      {
+        id: Date.now() + 2,
+        todo: "👌 You can set priority by @[0-1-2-3]",
+        done: false,
+        date: new Date().toLocaleString(),
+        priority: 2,
+      },
+      {
+        id: Date.now() + 3,
+        todo: "✅ You can finish todo by checked",
+        done: false,
+        date: new Date().toLocaleString(),
+        priority: 3,
+      },
+      {
+        id: Date.now() + 4,
+        todo: "❎ You can delete todo",
+        done: false,
+        date: new Date().toLocaleString(),
+        priority: 3,
+      },
+      {
+        id: Date.now() + 5,
+        todo: "❎ You can uncheck todo",
+        done: true,
+        date: new Date().toLocaleString(),
+        priority: 3,
       },
     ]
   );
