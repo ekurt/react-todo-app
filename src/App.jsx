@@ -15,12 +15,21 @@ function App() {
     },
     {
       id: Date.now() + 2,
-      todo: "🚦 You can set priority by @[0-1-2-3]",
+      todo: "🚦 You can set priority by @0, @1, @2, @3",
       done: false,
       date: new Date().toLocaleString(),
       priority: 2,
     },
-  ];
+    {
+      id: Date.now() + 3,
+      todo: "✨ You can drag-drop todos",
+      done: false,
+      date: new Date().toLocaleString(),
+      priority: 3,
+    },
+  ].sort((a, b) =>
+    b.priority > a.priority ? 1 : a.priority > b.priority ? -1 : 0
+  );
 
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || starterList
@@ -28,7 +37,7 @@ function App() {
   const [todo, setTodo] = useState("");
   const [priority, setPriority] = useState(0);
   const [filter, setFilter] = useState(null);
-  const [sort, setSort] = useState(true);
+  const [sort, setSort] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));

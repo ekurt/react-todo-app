@@ -2,18 +2,22 @@
   @apply w-full flex items-center justify-between;
 }
 
+.item {
+  @apply w-1/4 flex items-center justify-center py-2 text-white capitalize;
+}
+
 .normal {
-  @apply w-1/4 flex items-center justify-center py-2 text-white bg-blue-600;
+  @apply bg-blue-600;
 }
 
 .low {
-  @apply w-1/4 flex items-center justify-center py-2 text-white bg-green-700;
+  @apply bg-green-700;
 }
 
 .medium {
-  @apply w-1/4 flex items-center justify-center py-2 text-white bg-yellow-600;
+  @apply bg-yellow-600;
 }
 
 .high {
-  @apply w-1/4 flex items-center justify-center py-2 text-white bg-red-700;
+  @apply bg-red-700;
 }
