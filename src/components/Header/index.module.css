@@ -1,3 +1,23 @@
+.header {
+  @apply w-full flex justify-between items-end;
+}
+
 .h1 {
   @apply w-full flex justify-between items-center text-gray-100 tracking-[10px] text-4xl;
+}
+
+.buttons {
+  @apply flex justify-between items-end shrink-0 text-white;
+}
+
+.sort {
+  @apply bg-dark px-3 py-1 cursor-pointer;
+}
+
+.clear {
+  @apply bg-dark px-3 py-1 ml-2 cursor-pointer;
+}
+
+.disabled {
+  @apply pointer-events-none;
 }

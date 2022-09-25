@@ -5,49 +5,30 @@ import styles from "./App.module.css";
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 
 function App() {
-  const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [
-      {
-        id: Date.now() + 1,
-        todo: "📋 You can copy todo by press on it",
-        done: false,
-        date: new Date().toLocaleString(),
-        priority: 0,
-      },
-      {
-        id: Date.now() + 2,
-        todo: "👌 You can set priority by @[0-1-2-3]",
-        done: false,
-        date: new Date().toLocaleString(),
-        priority: 2,
-      },
-      {
-        id: Date.now() + 3,
-        todo: "✅ You can finish todo by checked",
-        done: false,
-        date: new Date().toLocaleString(),
-        priority: 3,
-      },
-      {
-        id: Date.now() + 4,
-        todo: "❎ You can delete todo",
-        done: false,
-        date: new Date().toLocaleString(),
-        priority: 3,
-      },
-      {
-        id: Date.now() + 5,
-        todo: "❎ You can uncheck todo",
-        done: true,
-        date: new Date().toLocaleString(),
-        priority: 3,
-      },
-    ]
-  );
+  const starterList = [
+    {
+      id: Date.now() + 1,
+      todo: "📋 You can copy todo by press on it",
+      done: false,
+      date: new Date().toLocaleString(),
+      priority: 0,
+    },
+    {
+      id: Date.now() + 2,
+      todo: "🚦 You can set priority by @[0-1-2-3]",
+      done: false,
+      date: new Date().toLocaleString(),
+      priority: 2,
+    },
+  ];
 
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || starterList
+  );
   const [todo, setTodo] = useState("");
   const [priority, setPriority] = useState(0);
   const [filter, setFilter] = useState(null);
+  const [sort, setSort] = useState(true);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
@@ -100,6 +81,38 @@ function App() {
     );
   };
 
+  const sortHandle = () => {
+    setTodos(
+      todos
+        .map((todo) => todo)
+        .sort((a, b) => {
+          if (sort) {
+            if (!a.done && !b.done) {
+              setSort(false);
+              return a.priority > b.priority
+                ? 1
+                : b.priority > a.priority
+                ? -1
+                : 0;
+            }
+          } else {
+            if (!a.done && !b.done) {
+              setSort(true);
+              return b.priority > a.priority
+                ? 1
+                : a.priority > b.priority
+                ? -1
+                : 0;
+            }
+          }
+        })
+    );
+  };
+
+  const deleteAllHandle = () => {
+    setTodos([]);
+  };
+
   const deleteHandle = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -111,7 +124,11 @@ function App() {
   return (
     <div className={styles.app}>
       <div className={styles.main}>
-        <Header />
+        <Header
+          todos={todos}
+          sortHandle={sortHandle}
+          deleteAllHandle={deleteAllHandle}
+        />
 
         <TodoForm
           submitHandle={submitHandle}

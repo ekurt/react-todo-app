@@ -86,7 +86,7 @@ export const TodoList = ({
         <Droppable droppableId="todos">
           {(provided) => (
             <div
-              className="w-full flex flex-col"
+              className={styles.todoContainer}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >

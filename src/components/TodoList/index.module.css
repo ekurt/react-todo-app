@@ -6,6 +6,10 @@
   @apply w-full min-h-[64px] flex justify-start items-center text-gray-400 border-b-2 border-b-gray-600 bg-dark p-4;
 }
 
+.todoContainer {
+  @apply w-full flex flex-col;
+}
+
 .todoItem {
   @apply w-full flex justify-center items-center;
 }
