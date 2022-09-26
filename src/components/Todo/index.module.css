@@ -36,3 +36,35 @@
 .high {
   @apply border-l-red-700;
 }
+
+.back {
+  @apply w-full flex justify-between items-center text-lg;
+}
+
+.Normal {
+  @apply text-blue-600 ml-1;
+}
+
+.Low {
+  @apply text-green-700 ml-1;
+}
+
+.Medium {
+  @apply text-yellow-600 ml-1;
+}
+
+.High {
+  @apply text-red-700 ml-1;
+}
+
+.dateContainer {
+  @apply flex items-center;
+}
+
+.date {
+  @apply text-slate-300;
+}
+
+.info {
+  @apply mr-3
+}
