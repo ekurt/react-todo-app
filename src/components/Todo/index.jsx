@@ -22,7 +22,14 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
 
   return (
     <ReactCardFlip isFlipped={flip} flipDirection="vertical">
-      <div className={todoClass} onContextMenuCapture={() => setFlip(!flip)}>
+      <div
+        className={todoClass}
+        onContextMenuCapture={() => setFlip(!flip)}
+        onVolumeChangeCapture={() => setFlip(!flip)}
+        onTouchStartCapture={(e) =>
+          e.touches.length === 2 ? setFlip(!flip) : false
+        }
+      >
         <svg width="0" height="0">
           <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop stopColor="#2ec0ff" offset="0%" />
@@ -58,8 +65,9 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
       <div
         className={todoClass}
         onContextMenuCapture={() => setFlip(!flip)}
-        onVolumeChange={() => setFlip(!flip)}
-        onTouchStart={(e) => e.touches.length === 2 ? setFlip(!flip) : false}
+        onTouchStartCapture={(e) =>
+          e.touches.length === 2 ? setFlip(!flip) : false
+        }
       >
         <div className={styles.back}>
           <span className={styles.dateContainer}>
