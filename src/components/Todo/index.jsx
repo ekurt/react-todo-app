@@ -76,10 +76,10 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
               style={{ fill: "url(#gradient)" }}
               className={styles.info}
             />
-            Created at: <span className={styles.date}>{todo.date}</span>
+            <span className={styles.created}>Created at:</span><span className={styles.date}>{todo.date}</span>
           </span>
           <span>
-            Priority:
+            <span className={styles.priority}>Priority:</span>
             <span className={styles[priorities[todo.priority]]}>
               {priorities[todo.priority]}
             </span>

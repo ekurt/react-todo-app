@@ -42,23 +42,31 @@
 }
 
 .Normal {
-  @apply text-blue-600 ml-1;
+  @apply text-blue-600;
 }
 
 .Low {
-  @apply text-green-700 ml-1;
+  @apply text-green-700;
 }
 
 .Medium {
-  @apply text-yellow-600 ml-1;
+  @apply text-yellow-600;
 }
 
 .High {
-  @apply text-red-700 ml-1;
+  @apply text-red-700;
 }
 
 .dateContainer {
   @apply flex items-center;
+}
+
+.created {
+  @apply hidden md:inline mr-1;
+}
+
+.priority {
+  @apply hidden md:inline mr-1;
 }
 
 .date {
@@ -66,5 +74,5 @@
 }
 
 .info {
-  @apply mr-3
+  @apply mr-3;
 }

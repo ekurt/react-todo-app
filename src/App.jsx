@@ -25,6 +25,21 @@ function App() {
       todo: "✨ You can drag-drop todos",
       done: false,
       date: new Date().toLocaleString(),
+      priority: 1,
+    },    
+    {
+      id: Date.now() + 4,
+      todo: "💻 You can right click for info (Desktop)",
+      done: false,
+      date: new Date().toLocaleString(),
+      priority: 3,
+    },
+      
+    {
+      id: Date.now() + 5,
+      todo: "📱 You can two finger click for info (Mobile)",
+      done: false,
+      date: new Date().toLocaleString(),
       priority: 3,
     },
   ].sort((a, b) =>
