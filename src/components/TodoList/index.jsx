@@ -68,7 +68,7 @@ export const TodoList = ({
           <FaRegDotCircle
             size={30}
             style={{ fill: "url(#gradient)" }}
-            className={styles.check}
+            className={styles.checkTemp}
           />
           <span className={styles.todoItemTemp}>{temp}</span>
         </div>
