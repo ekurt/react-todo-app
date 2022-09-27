@@ -2,7 +2,7 @@ import React from "react";
 import { FaCircleNotch } from "react-icons/fa";
 import styles from "./index.module.css";
 
-export const TodoForm = ({ submitHandle, changeHandle, todo }) => {
+export const TodoForm = ({ submitHandle, changeHandle, todo, setTodo }) => {
   return (
     <div className={styles.todoForm}>
       <svg width="0" height="0">
@@ -18,11 +18,12 @@ export const TodoForm = ({ submitHandle, changeHandle, todo }) => {
           className={styles.icon}
         />
         <input
-          type="text"
+          type="search"
           className={styles.input}
           placeholder="Create a new todo list . ."
           value={todo}
           onChange={changeHandle}
+          onKeyUp={(e) => e.key === "Escape" ? setTodo("") : null }
           autoFocus
         />
       </form>

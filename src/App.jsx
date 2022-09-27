@@ -158,6 +158,7 @@ function App() {
           submitHandle={submitHandle}
           changeHandle={changeHandle}
           todo={todo}
+          setTodo={setTodo}
         />
 
         <TodoList
