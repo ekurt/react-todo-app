@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TodoForm, TodoList, Header, Footer } from "./components";
 import styles from "./App.module.css";
+import useSound from "use-sound";
 
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 
@@ -26,7 +27,7 @@ function App() {
       done: false,
       date: new Date().toLocaleString(),
       priority: 1,
-    },    
+    },
     {
       id: Date.now() + 4,
       todo: "💻 You can right click for info (Desktop)",
@@ -34,7 +35,7 @@ function App() {
       date: new Date().toLocaleString(),
       priority: 3,
     },
-      
+
     {
       id: Date.now() + 5,
       todo: "📱 You can two finger click for info (Mobile)",
@@ -54,6 +55,18 @@ function App() {
   const [filter, setFilter] = useState(null);
   const [sort, setSort] = useState(true);
 
+  const [playScribble] = useSound("assets/sounds/scribble.wav", {
+    volume: 0.50,
+  });
+
+  const [playCheck] = useSound("assets/sounds/check.wav", {
+    volume: 0.05,
+  });
+
+  const [playRemove] = useSound("assets/sounds/remove.wav", {
+    volume: 0.50,
+  });
+
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
     setPriority(0);
@@ -63,6 +76,8 @@ function App() {
     e.preventDefault();
 
     if (!todo) return;
+
+    playScribble();
 
     setTodos([
       {
@@ -90,6 +105,7 @@ function App() {
   };
 
   const doneHandle = (id) => {
+    playCheck();
     setTodos(
       todos
         .map((todo) => {
@@ -138,6 +154,7 @@ function App() {
   };
 
   const deleteHandle = (id) => {
+    playRemove();
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 

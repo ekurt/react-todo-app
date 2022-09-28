@@ -5,6 +5,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import styles from "./index.module.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactCardFlip from "react-card-flip";
+import useSound from "use-sound";
 
 export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
   let todoItem = classNames(styles.todoItem, { [styles.done]: todo.done });
@@ -18,17 +19,26 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
 
   const [flip, setFlip] = useState(false);
 
+  const [playFlip] = useSound("assets/sounds/flip.wav", {
+    volume: 0.25,
+  });
+
   const priorities = ["Normal", "Low", "Medium", "High"];
 
   return (
     <ReactCardFlip isFlipped={flip} flipDirection="vertical">
       <div
         className={todoClass}
-        onContextMenuCapture={() => setFlip(!flip)}
-        onVolumeChangeCapture={() => setFlip(!flip)}
-        onTouchStartCapture={(e) =>
-          e.touches.length === 2 ? setFlip(!flip) : false
-        }
+        onContextMenuCapture={() => {
+          setFlip(!flip);
+          playFlip();
+        }}
+        onTouchStartCapture={(e) => {
+          if (e.touches.length === 2) {
+            setFlip(!flip);
+            playFlip();
+          }
+        }}
       >
         <svg width="0" height="0">
           <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -64,10 +74,16 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
       </div>
       <div
         className={todoClass}
-        onContextMenuCapture={() => setFlip(!flip)}
-        onTouchStartCapture={(e) =>
-          e.touches.length === 2 ? setFlip(!flip) : false
-        }
+        onContextMenuCapture={() => {
+          setFlip(!flip);
+          playFlip();
+        }}
+        onTouchStartCapture={(e) => {
+          if (e.touches.length === 2) {
+            setFlip(!flip);
+            playFlip();
+          }
+        }}
       >
         <div className={styles.back}>
           <span className={styles.dateContainer}>
@@ -76,7 +92,8 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
               style={{ fill: "url(#gradient)" }}
               className={styles.info}
             />
-            <span className={styles.created}>Created at:</span><span className={styles.date}>{todo.date}</span>
+            <span className={styles.created}>Created at:</span>
+            <span className={styles.date}>{todo.date}</span>
           </span>
           <span>
             <span className={styles.priority}>Priority:</span>
