@@ -52,7 +52,7 @@ function App() {
   const [todo, setTodo] = useState("");
   const [priority, setPriority] = useState(0);
   const [filter, setFilter] = useState(null);
-  const [sort, setSort] = useState(false);
+  const [sort, setSort] = useState(true);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
