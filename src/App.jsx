@@ -36,7 +36,6 @@ function App() {
       date: new Date().toLocaleString(),
       priority: 3,
     },
-
     {
       id: Date.now() + 5,
       todo: "📱 You can two finger click for info (Mobile)",
