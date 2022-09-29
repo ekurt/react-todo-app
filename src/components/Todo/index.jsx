@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactCardFlip from "react-card-flip";
 import useSound from "use-sound";
 
-export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
+export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
   let todoItem = classNames(styles.todoItem, { [styles.done]: todo.done });
   let todoClass = classNames(
     styles.todo,
@@ -20,7 +20,7 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify }) => {
   const [flip, setFlip] = useState(false);
 
   const [playFlip] = useSound("assets/sounds/flip.wav", {
-    volume: 0.25,
+    volume: volumes.playFlip,
   });
 
   const priorities = ["Normal", "Low", "Medium", "High"];

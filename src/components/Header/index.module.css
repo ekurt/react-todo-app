@@ -11,7 +11,7 @@
 }
 
 .sort {
-  @apply bg-dark px-3 py-1 cursor-pointer;
+  @apply bg-dark px-3 py-1 ml-2 cursor-pointer;
 }
 
 .clear {
@@ -20,4 +20,8 @@
 
 .disabled {
   @apply pointer-events-none;
+}
+
+.muted {
+  @apply bg-dark px-3 py-1 cursor-pointer;
 }

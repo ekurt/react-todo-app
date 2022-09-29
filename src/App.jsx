@@ -3,7 +3,8 @@ import { TodoForm, TodoList, Header, Footer } from "./components";
 import styles from "./App.module.css";
 import useSound from "use-sound";
 
-const LOCAL_STORAGE_KEY = "react-todo-list-todos";
+const LOCAL_STORAGE_TODOS = "react-todo-list-todos";
+const LOCAL_STORAGE_MUTED = "react-todo-list-muted";
 
 function App() {
   const starterList = [
@@ -48,29 +49,66 @@ function App() {
   );
 
   const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || starterList
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS)) || starterList
   );
   const [todo, setTodo] = useState("");
   const [priority, setPriority] = useState(0);
   const [filter, setFilter] = useState(null);
   const [sort, setSort] = useState(true);
 
+  const [muted, setMuted] = useState(
+    Number(localStorage.getItem(LOCAL_STORAGE_MUTED)) || 0
+  );
+
+  const mutedValues = {
+    playScribble: 0,
+    playCheck: 0,
+    playRemove: 0,
+    playFlip: 0,
+    playSort: 0,
+    playClearAll: 0,
+  };
+
+  const unmutedValues = {
+    playScribble: 0.5,
+    playCheck: 0.05,
+    playRemove: 0.5,
+    playFlip: 0.25,
+    playSort: 0.25,
+    playClearAll: 1,
+  };
+
+  const [volumes, setVolumes] = useState(muted ? mutedValues : unmutedValues);
+
   const [playScribble] = useSound("assets/sounds/scribble.wav", {
-    volume: 0.50,
+    volume: volumes.playScribble,
   });
 
   const [playCheck] = useSound("assets/sounds/check.wav", {
-    volume: 0.05,
+    volume: volumes.playCheck,
+  });
+
+  const [playSort] = useSound("assets/sounds/sort.wav", {
+    volume: volumes.playSort,
   });
 
   const [playRemove] = useSound("assets/sounds/remove.wav", {
-    volume: 0.50,
+    volume: volumes.playRemove,
+  });
+
+  const [playClearAll] = useSound("assets/sounds/clearAll.wav", {
+    volume: volumes.playClearAll,
   });
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+    localStorage.setItem(LOCAL_STORAGE_TODOS, JSON.stringify(todos));
     setPriority(0);
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_MUTED, Number(muted));
+    muted === 1 ? setVolumes(mutedValues) : setVolumes(unmutedValues);
+  }, [muted]);
 
   const submitHandle = (e) => {
     e.preventDefault();
@@ -122,6 +160,7 @@ function App() {
   };
 
   const sortHandle = () => {
+    playSort();
     setTodos(
       todos
         .map((todo) => todo)
@@ -150,6 +189,7 @@ function App() {
   };
 
   const deleteAllHandle = () => {
+    playClearAll();
     setTodos([]);
   };
 
@@ -169,6 +209,8 @@ function App() {
           todos={todos}
           sortHandle={sortHandle}
           deleteAllHandle={deleteAllHandle}
+          muted={muted}
+          setMuted={setMuted}
         />
 
         <TodoForm
@@ -176,6 +218,7 @@ function App() {
           changeHandle={changeHandle}
           todo={todo}
           setTodo={setTodo}
+          volumes={volumes}
         />
 
         <TodoList
@@ -188,6 +231,8 @@ function App() {
           filter={filter}
           setFilter={setFilter}
           priority={priority}
+          volumes={volumes}
+          muted={muted}
         />
 
         <Footer />

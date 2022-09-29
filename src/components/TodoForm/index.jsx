@@ -1,8 +1,13 @@
 import React from "react";
 import { FaCircleNotch } from "react-icons/fa";
 import styles from "./index.module.css";
+import useSound from "use-sound";
 
-export const TodoForm = ({ submitHandle, changeHandle, todo, setTodo }) => {
+export const TodoForm = ({ submitHandle, changeHandle, todo, setTodo, volumes }) => {
+  const [playRemove] = useSound("assets/sounds/remove.wav", {
+    volume: volumes.playRemove,
+  });
+
   return (
     <div className={styles.todoForm}>
       <svg width="0" height="0">
@@ -23,7 +28,12 @@ export const TodoForm = ({ submitHandle, changeHandle, todo, setTodo }) => {
           placeholder="Create a new todo list . ."
           value={todo}
           onChange={changeHandle}
-          onKeyUp={(e) => e.key === "Escape" ? setTodo("") : null }
+          onKeyUp={(e) => {
+            if (e.key === "Escape") {
+              setTodo("");
+              playRemove();
+            }
+          }}
           autoFocus
         />
       </form>

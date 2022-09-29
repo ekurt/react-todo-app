@@ -17,6 +17,7 @@ export const TodoList = ({
   filter,
   setFilter,
   priority,
+  volumes,
 }) => {
   const [temp, setTemp] = useState(todo);
   const [isDragDisabled, setDragDisabled] = useState(false);
@@ -112,6 +113,7 @@ export const TodoList = ({
                           doneHandle={doneHandle}
                           deleteHandle={deleteHandle}
                           notify={notify}
+                          volumes={volumes}
                         />
                       </div>
                     )}
