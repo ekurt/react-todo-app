@@ -1,14 +1,14 @@
 .header {
-  @apply w-full flex justify-between items-end;
+  @apply w-full flex justify-between items-center;
 }
 
 .h1 {
-  @apply w-full flex justify-between items-center text-gray-100 tracking-[10px] text-4xl;
+  @apply w-full flex justify-start items-center text-gray-100 tracking-[10px] text-4xl;
   font-family: "Fredericka the Great", cursive;
 }
 
 .buttons {
-  @apply flex justify-between items-end shrink-0 text-white;
+  @apply flex justify-between items-center shrink-0 text-white;
 }
 
 .sort {
