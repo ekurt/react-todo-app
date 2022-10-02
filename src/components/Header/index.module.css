@@ -4,6 +4,7 @@
 
 .h1 {
   @apply w-full flex justify-between items-center text-gray-100 tracking-[10px] text-4xl;
+  font-family: "Fredericka the Great", cursive;
 }
 
 .buttons {
