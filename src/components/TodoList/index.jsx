@@ -5,6 +5,7 @@ import { Todo, TodoFooter } from "../";
 import { FaRegDotCircle } from "react-icons/fa";
 import styles from "./index.module.css";
 import { ToastContainer, toast } from "react-toastify";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import "react-toastify/dist/ReactToastify.min.css";
 
 export const TodoList = ({
@@ -21,6 +22,8 @@ export const TodoList = ({
 }) => {
   const [temp, setTemp] = useState(todo);
   const [isDragDisabled, setDragDisabled] = useState(false);
+
+  const [animationParent, setAutoAnimate] = useAutoAnimate();
 
   let todoClass = classNames(
     styles.todo,
@@ -40,7 +43,10 @@ export const TodoList = ({
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setTodos(items);
+    setTimeout(() => setAutoAnimate(true), 1);
   };
+
+  const handleOnDragStart = () => setAutoAnimate(false);
 
   const notify = () => {
     toast(`📋 Copied to clipboard!`, {
@@ -83,7 +89,10 @@ export const TodoList = ({
         </div>
       ) : null}
 
-      <DragDropContext onDragEnd={handleOnDrugEnd}>
+      <DragDropContext
+        onBeforeDragStart={handleOnDragStart}
+        onDragEnd={handleOnDrugEnd}
+      >
         <Droppable droppableId="todos">
           {(provided) => (
             <div
@@ -91,34 +100,38 @@ export const TodoList = ({
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {todos
-                .filter((todo) =>
-                  filter !== null ? todo.done === filter : todo
-                )
-                .map((item, index) => (
-                  <Draggable
-                    key={`${item.id}`}
-                    draggableId={`${item.id}`}
-                    index={index}
-                    isDragDisabled={isDragDisabled ? isDragDisabled : item.done}
-                  >
-                    {(provided) => (
-                      <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        <Todo
-                          todo={item}
-                          doneHandle={doneHandle}
-                          deleteHandle={deleteHandle}
-                          notify={notify}
-                          volumes={volumes}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+              <div className="w-full" ref={animationParent}>
+                {todos
+                  .filter((todo) =>
+                    filter !== null ? todo.done === filter : todo
+                  )
+                  .map((item, index) => (
+                    <Draggable
+                      key={`${item.id}`}
+                      draggableId={`${item.id}`}
+                      index={index}
+                      isDragDisabled={
+                        isDragDisabled ? isDragDisabled : item.done
+                      }
+                    >
+                      {(provided) => (
+                        <div
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <Todo
+                            todo={item}
+                            doneHandle={doneHandle}
+                            deleteHandle={deleteHandle}
+                            notify={notify}
+                            volumes={volumes}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
