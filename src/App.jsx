@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TodoForm, TodoList, Header, Footer } from "./components";
 import styles from "./App.module.css";
 import useSound from "use-sound";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const LOCAL_STORAGE_TODOS = "react-todo-list-todos";
 const LOCAL_STORAGE_MUTED = "react-todo-list-muted";
@@ -54,6 +55,9 @@ function App() {
   const [priority, setPriority] = useState(0);
   const [filter, setFilter] = useState(null);
   const [sort, setSort] = useState(true);
+  const [wait, setWait] = useState(false);
+
+  const [animationParent, setAutoAnimate] = useAutoAnimate();
 
   const [muted, setMuted] = useState(
     Number(localStorage.getItem(LOCAL_STORAGE_MUTED)) || 0
@@ -112,20 +116,26 @@ function App() {
   const submitHandle = (e) => {
     e.preventDefault();
 
+    setWait(true);
+
     if (!todo) return;
 
     playScribble();
 
-    setTodos([
-      {
-        id: Date.now(),
-        todo: todo,
-        done: false,
-        date: new Date().toLocaleString(),
-        priority: priority,
-      },
-      ...todos,
-    ]);
+    setTimeout(() => {
+      setTodos([
+        {
+          id: Date.now(),
+          todo: todo.trim(),
+          done: false,
+          date: new Date().toLocaleString(),
+          priority: priority,
+        },
+        ...todos,
+      ]);
+
+      setWait(false);
+    }, 300);
 
     setTodo("");
   };
@@ -137,7 +147,7 @@ function App() {
       setTodo(e.target.value.replace(/@[0123]+/, ""));
       setPriority(Number(e.target.value.match(/@[0123]+/)[0].replace("@", "")));
     } else {
-      setTodo(e.target.value);
+      setTodo(e.target.value.replace(/ {2,}/g, " "));
     }
   };
 
@@ -188,8 +198,12 @@ function App() {
   };
 
   const deleteAllHandle = () => {
+    // setAutoAnimate(false);
+
     playClearAll();
     setTodos([]);
+
+    // setTimeout(() => setAutoAnimate(true), 1);
   };
 
   const deleteHandle = (id) => {
@@ -232,6 +246,9 @@ function App() {
           priority={priority}
           volumes={volumes}
           muted={muted}
+          animationParent={animationParent}
+          setAutoAnimate={setAutoAnimate}
+          wait={wait}
         />
 
         <Footer />

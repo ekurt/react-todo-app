@@ -5,7 +5,6 @@ import { Todo, TodoFooter } from "../";
 import { FaRegDotCircle } from "react-icons/fa";
 import styles from "./index.module.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import "react-toastify/dist/ReactToastify.min.css";
 
 export const TodoList = ({
@@ -19,11 +18,12 @@ export const TodoList = ({
   setFilter,
   priority,
   volumes,
+  animationParent,
+  setAutoAnimate,
+  wait,
 }) => {
   const [temp, setTemp] = useState(todo);
   const [isDragDisabled, setDragDisabled] = useState(false);
-
-  const [animationParent, setAutoAnimate] = useAutoAnimate();
 
   let todoClass = classNames(
     styles.todo,
@@ -70,25 +70,6 @@ export const TodoList = ({
         </linearGradient>
       </svg>
 
-      {temp ? (
-        <div className={todoClass}>
-          <FaRegDotCircle
-            size={30}
-            style={{ fill: "url(#gradient)" }}
-            className={styles.checkTemp}
-          />
-          <span className={styles.todoItemTemp}>{temp}</span>
-        </div>
-      ) : null}
-
-      {todos.length == 0 && !temp ? (
-        <div className={styles.todo}>
-          <span className={styles.todoItem}>
-            There is nothing to do here 🥳
-          </span>
-        </div>
-      ) : null}
-
       <DragDropContext
         onBeforeDragStart={handleOnDragStart}
         onDragEnd={handleOnDrugEnd}
@@ -101,6 +82,25 @@ export const TodoList = ({
               ref={provided.innerRef}
             >
               <div className="w-full" ref={animationParent}>
+                {temp ? (
+                  <div className={todoClass}>
+                    <FaRegDotCircle
+                      size={30}
+                      style={{ fill: "url(#gradient)" }}
+                      className={styles.checkTemp}
+                    />
+                    <span className={styles.todoItemTemp}>{temp}</span>
+                  </div>
+                ) : null}
+
+                {todos.length == 0 && !temp && !wait ? (
+                  <div className={styles.todo}>
+                    <span className={styles.todoItem}>
+                      There is nothing to do here 🥳
+                    </span>
+                  </div>
+                ) : null}
+
                 {todos
                   .filter((todo) =>
                     filter !== null ? todo.done === filter : todo
