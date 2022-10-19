@@ -3,7 +3,7 @@
 }
 
 .todo {
-  @apply w-full min-h-[64px] flex justify-start items-center text-gray-400 border-b-2 border-b-gray-600 bg-dark p-4 overflow-x-auto;
+  @apply w-full min-h-[64px] flex justify-start items-center text-gray-400 border-b-2 border-b-gray-600 bg-dark p-4;
 }
 
 .todo::-webkit-scrollbar {
@@ -27,7 +27,7 @@
 }
 
 .todoItemTemp {
-  @apply w-full flex justify-start items-center;
+  @apply w-full break-words overflow-hidden;
 }
 
 .checkTemp {
