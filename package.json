@@ -27,7 +27,8 @@
   "scripts": {
     "dev": "vite --port 7362 --open",
     "build": "vite build",
-    "preview": "vite preview --port 5000 --open"
+    "preview": "vite preview --port 5000 --open",
+    "serve": "vite --port 7362"
   },
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.3",
