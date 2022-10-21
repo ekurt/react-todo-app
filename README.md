@@ -41,43 +41,38 @@
 
 ## ⚙️ Development
 
-### Clone remote repo to your local
+#### Clone remote repo to your local
 
 ```
 git clone https://github.com/ekurt/react-todo-app.git
-# or `gh repo clone ekurt/react-todo-app` (via Github CLI)
 ```
 
-### Change directory
+#### Change directory
 
 ```
 cd react-todo-app
 ```
 
-### Install dependencies
+#### Install dependencies
 
 ```
 yarn
-# or `npm install`
 ```
 
-### Happy Hacking 🎉
+#### Happy Hacking 🎉
 
 ```
 yarn dev
-# or `npm run dev`
 ```
 
-### For build:
+#### Build:
 
 ```
 yarn build
-# or `npm run build`
 ```
 
-### For preview the build:
+#### Preview the build:
 
 ```
 yarn preview
-# or `npm run preview`
 ```
