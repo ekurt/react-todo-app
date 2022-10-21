@@ -8,7 +8,7 @@
 
 ## ✨ Features
 
-- All data storaged in `Local Storage`
+- All data is stored in `Local Storage`
 - Animate effects
 - Sound effects
 - Drag-Drop
