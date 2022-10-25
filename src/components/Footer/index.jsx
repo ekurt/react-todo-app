@@ -18,7 +18,7 @@ export const Footer = () => {
           <span>
             To contribute, visit my
             <a
-              href="https://github.com/ekurt/react-cv-maker"
+              href="https://github.com/ekurt/react-todo-app"
               target="_blank"
               className={styles.mark}
             >
