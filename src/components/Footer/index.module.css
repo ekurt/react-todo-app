@@ -1,5 +1,5 @@
 .footer {
-  @apply w-full flex items-center justify-between;
+  @apply w-full flex items-center justify-between mb-5;
 }
 
 .item {
@@ -20,4 +20,16 @@
 
 .high {
   @apply bg-red-700;
+}
+
+.footerBottom {
+  @apply  w-full min-h-[60px] flex justify-start items-center text-gray-400 bg-dark p-2;
+}
+
+.bottomInner {
+  @apply w-full flex flex-wrap justify-center items-center gap-x-1 text-center leading-loose;
+}
+
+.mark {
+  @apply bg-white text-dark font-bold px-2 py-1 mx-1;
 }
