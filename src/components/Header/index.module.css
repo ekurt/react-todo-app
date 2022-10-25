@@ -1,9 +1,9 @@
 .header {
-  @apply w-full flex justify-between items-center;
+  @apply w-full flex flex-wrap justify-between items-center;
 }
 
 .h1 {
-  @apply w-full flex justify-start items-center text-gray-100 tracking-[10px] text-4xl;
+  @apply flex justify-start items-center text-gray-100 tracking-[10px] text-4xl;
   font-family: "Fredericka the Great", cursive;
 }
 
