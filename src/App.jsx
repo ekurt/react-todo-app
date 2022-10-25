@@ -198,12 +198,8 @@ function App() {
   };
 
   const deleteAllHandle = () => {
-    // setAutoAnimate(false);
-
     playClearAll();
     setTodos([]);
-
-    // setTimeout(() => setAutoAnimate(true), 1);
   };
 
   const deleteHandle = (id) => {
