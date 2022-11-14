@@ -15,6 +15,7 @@
 - Copy the clipboard
 - Priority for todos
 - Sorting
+- Import and Export todos
 
 ## 💻 Tech Stack
 
