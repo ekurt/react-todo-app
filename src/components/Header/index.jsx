@@ -83,6 +83,7 @@ export const Header = ({
         id="file"
         ref={inputFile}
         onChange={handleChange}
+        accept=".json"
         style={{ display: "none" }}
       />
     </div>
