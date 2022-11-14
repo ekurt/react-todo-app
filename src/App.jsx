@@ -211,6 +211,24 @@ function App() {
     setTodos(todos.filter((todo) => !todo.done));
   };
 
+  const importDataHandle = (data) => {
+    setTodos([...data, ...todos]);
+  };
+
+  const exportDataHandle = () => {
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(todos, null, 2)
+    )}`;
+
+    const link = document.createElement("a");
+    const date = new Date().toLocaleDateString().replace(/\//g, "-");
+    const time = new Date().toLocaleTimeString().replace(/[: ]/g, "-");
+
+    link.href = jsonString;
+    link.download = `todos-${date}-${time}.json`;
+    link.click();
+  };
+
   return (
     <div className={styles.app}>
       <div className={styles.main}>
@@ -220,6 +238,9 @@ function App() {
           deleteAllHandle={deleteAllHandle}
           muted={muted}
           setMuted={setMuted}
+          sort={sort}
+          importDataHandle={importDataHandle}
+          exportDataHandle={exportDataHandle}
         />
 
         <TodoForm
