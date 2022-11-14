@@ -8,21 +8,13 @@
 }
 
 .buttons {
-  @apply flex justify-between items-center shrink-0 text-white;
+  @apply flex flex-wrap justify-between items-center shrink-0 text-white;
 }
 
-.sort {
-  @apply bg-dark px-3 py-1 ml-2 cursor-pointer;
-}
-
-.clear {
-  @apply bg-dark px-3 py-1 ml-2 cursor-pointer;
+.icon {
+  @apply bg-dark px-3 py-2 border-l-2 border-light cursor-pointer;
 }
 
 .disabled {
   @apply pointer-events-none;
-}
-
-.muted {
-  @apply bg-dark px-3 py-1 cursor-pointer;
 }
