@@ -18,7 +18,7 @@ function App() {
     },
     {
       id: Date.now() + 2,
-      todo: "🚦 You can set priority by @0, @1, @2, @3",
+      todo: "🚦 You can set priority by [@0] [@1] [@2] [@3]",
       done: false,
       date: new Date().toLocaleString(),
       priority: 2,
@@ -32,17 +32,24 @@ function App() {
     },
     {
       id: Date.now() + 4,
-      todo: "💻 You can right click for info (Desktop)",
+      todo: "💻 You can right click for info [Desktop]",
       done: false,
       date: new Date().toLocaleString(),
       priority: 3,
     },
     {
       id: Date.now() + 5,
-      todo: "📱 You can two finger click for info (Mobile)",
+      todo: "📱 You can two finger click for info [Mobile]",
       done: false,
       date: new Date().toLocaleString(),
       priority: 3,
+    },
+    {
+      id: Date.now() + 6,
+      todo: "🔖 You can add [tag] with brackets [&#91tag name&#93]",
+      done: false,
+      date: new Date().toLocaleString(),
+      priority: 2,
     },
   ].sort((a, b) =>
     b.priority > a.priority ? 1 : a.priority > b.priority ? -1 : 0
