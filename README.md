@@ -9,13 +9,14 @@
 ## ✨ Features
 
 - All data is stored in `Local Storage`
+- Import and Export todos
 - Animate effects
 - Sound effects
 - Drag-Drop
 - Copy the clipboard
 - Priority for todos
+- Tags for todos
 - Sorting
-- Import and Export todos
 
 ## 💻 Tech Stack
 
@@ -34,6 +35,7 @@
 - react-icons
 - react-toastify
 - react-card-flip
+- react-html-parser
 - react-beautiful-dnd
 - react-copy-to-clipboard
 - classnames
