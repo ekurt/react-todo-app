@@ -6,6 +6,7 @@ import styles from "./index.module.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactCardFlip from "react-card-flip";
 import useSound from "use-sound";
+import ReactHtmlParser from "react-html-parser";
 
 export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
   let todoItem = classNames(styles.todoItem, { [styles.done]: todo.done });
@@ -24,6 +25,12 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
   });
 
   const priorities = ["Normal", "Low", "Medium", "High"];
+
+  const convertTag = (todo) => {
+    return ReactHtmlParser(
+      todo.replace(/\[/g, "<mark>").replace(/\]/g, "</mark>")
+    );
+  };
 
   return (
     <ReactCardFlip isFlipped={flip} flipDirection="vertical">
@@ -63,7 +70,7 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
         )}
 
         <CopyToClipboard text={todo.todo} onCopy={notify}>
-          <span className={todoItem}>{todo.todo}</span>
+          <span className={todoItem}>{convertTag(todo.todo)}</span>
         </CopyToClipboard>
 
         <FaTimes

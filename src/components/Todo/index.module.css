@@ -7,15 +7,19 @@
 }
 
 .todo::-webkit-scrollbar-track {
-  background: rgb(170, 170, 170)
+  background: rgb(170, 170, 170);
 }
 
 .todo::-webkit-scrollbar-thumb {
-  background: rgb(108, 117, 125)
+  background: rgb(108, 117, 125);
 }
 
 .todoItem {
   @apply w-full break-words overflow-hidden;
+}
+
+mark {
+  @apply px-[5px] py-1 mx-[2px] bg-white text-dark font-bold;
 }
 
 .done {
