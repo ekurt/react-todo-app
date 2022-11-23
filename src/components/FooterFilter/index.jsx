@@ -1,26 +1,29 @@
 import React from "react";
 import classNames from "classnames";
 import styles from "./index.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter, setActive, setDragDisabled } from "../../stores/site";
 
 export const FooterFilter = ({
   style,
-  todos,
-  active,
   activeTodosCount,
   completedTodosCount,
-  setFilter,
-  setActive,
-  setDragDisabled,
 }) => {
+  const dispatch = useDispatch();
+  const { active } = useSelector((state) => state.site);
+  const { todos } = useSelector((state) => state.todo);
+
   return (
     <div className={style}>
       <span
         onClick={() => {
-          setFilter(null);
-          setActive({
-            state: "all",
-          });
-          setDragDisabled(false);
+          dispatch(setFilter(null));
+          dispatch(
+            setActive({
+              state: "all",
+            })
+          );
+          dispatch(setDragDisabled(false));
         }}
         className={classNames(styles.pointer, {
           [styles.active]: active.state === "all",
@@ -30,11 +33,13 @@ export const FooterFilter = ({
       </span>
       <span
         onClick={() => {
-          setFilter(false);
-          setActive({
-            state: "active",
-          });
-          setDragDisabled(true);
+          dispatch(setFilter(false));
+          dispatch(
+            setActive({
+              state: "active",
+            })
+          );
+          dispatch(setDragDisabled(true));
         }}
         className={classNames(styles.pointer, {
           [styles.active]: active.state === "active",
@@ -45,11 +50,13 @@ export const FooterFilter = ({
       </span>
       <span
         onClick={() => {
-          setFilter(true);
-          setActive({
-            state: "completed",
-          });
-          setDragDisabled(true);
+          dispatch(setFilter(true));
+          dispatch(
+            setActive({
+              state: "completed",
+            })
+          );
+          dispatch(setDragDisabled(true));
         }}
         className={classNames(styles.pointer, {
           [styles.active]: active.state === "completed",

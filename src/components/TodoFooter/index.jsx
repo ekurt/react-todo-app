@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { FooterFilter } from "../";
 import classNames from "classnames";
 import styles from "./index.module.css";
+import { setTodos } from "../../stores/todo";
+import { useDispatch, useSelector } from "react-redux";
 
-export const TodoFooter = ({
-  todos,
-  deleteCompletedHandle,
-  setFilter,
-  setDragDisabled,
-}) => {
-  let link = classNames(styles.pointer, { [styles.active]: todos.done });
+export const TodoFooter = () => {
+  const dispatch = useDispatch();
+  const { todos } = useSelector((state) => state.todo);
 
   const activeTodosCount = todos.filter((todo) => !todo.done).length;
   const completedTodosCount = todos.filter((todo) => todo.done).length;
@@ -20,9 +18,9 @@ export const TodoFooter = ({
     setCount(activeTodosCount);
   }, [todos]);
 
-  const [active, setActive] = useState({
-    state: "all",
-  });
+  const deleteCompletedHandle = () => {
+    dispatch(setTodos(todos.filter((todo) => !todo.done)));
+  };
 
   return (
     <>
@@ -33,13 +31,8 @@ export const TodoFooter = ({
 
         <FooterFilter
           style={styles.middle}
-          todos={todos}
-          active={active}
           activeTodosCount={activeTodosCount}
           completedTodosCount={completedTodosCount}
-          setFilter={setFilter}
-          setActive={setActive}
-          setDragDisabled={setDragDisabled}
         />
 
         <span
@@ -54,13 +47,8 @@ export const TodoFooter = ({
 
       <FooterFilter
         style={styles.bottom}
-        todos={todos}
-        active={active}
         activeTodosCount={activeTodosCount}
         completedTodosCount={completedTodosCount}
-        setFilter={setFilter}
-        setActive={setActive}
-        setDragDisabled={setDragDisabled}
       />
     </>
   );

@@ -4,26 +4,22 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Todo, TodoFooter } from "../";
 import { FaRegDotCircle } from "react-icons/fa";
 import styles from "./index.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setTodos } from "../../stores/todo";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-export const TodoList = ({
-  todo,
-  todos,
-  setTodos,
-  doneHandle,
-  deleteHandle,
-  deleteCompletedHandle,
-  filter,
-  setFilter,
-  priority,
-  volumes,
-  animationParent,
-  setAutoAnimate,
-  wait,
-}) => {
+export const TodoList = () => {
+  const dispatch = useDispatch();
+  const { filter, priority, wait, isDragDisabled } = useSelector(
+    (state) => state.site
+  );
+  const { todos, todo } = useSelector((state) => state.todo);
+
   const [temp, setTemp] = useState(todo);
-  const [isDragDisabled, setDragDisabled] = useState(false);
+
+  const [animationParent, setAutoAnimate] = useAutoAnimate();
 
   let todoClass = classNames(
     styles.todo,
@@ -42,24 +38,11 @@ export const TodoList = ({
     const items = Array.from(todos);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    setTodos(items);
+    dispatch(setTodos(items));
     setTimeout(() => setAutoAnimate(true), 1);
   };
 
   const handleOnDragStart = () => setAutoAnimate(false);
-
-  const notify = () => {
-    toast(`📋 Copied to clipboard!`, {
-      position: "top-right",
-      theme: "light",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
 
   return (
     <div className={styles.todoList}>
@@ -120,13 +103,7 @@ export const TodoList = ({
                           {...provided.dragHandleProps}
                           ref={provided.innerRef}
                         >
-                          <Todo
-                            todo={item}
-                            doneHandle={doneHandle}
-                            deleteHandle={deleteHandle}
-                            notify={notify}
-                            volumes={volumes}
-                          />
+                          <Todo todo={item} />
                         </div>
                       )}
                     </Draggable>
@@ -140,12 +117,7 @@ export const TodoList = ({
 
       <ToastContainer />
 
-      <TodoFooter
-        todos={todos}
-        deleteCompletedHandle={deleteCompletedHandle}
-        setFilter={setFilter}
-        setDragDisabled={setDragDisabled}
-      />
+      <TodoFooter />
     </div>
   );
 };

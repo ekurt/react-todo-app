@@ -10,18 +10,43 @@ import {
   FaSortAmountDownAlt,
   FaSortAmountDown,
 } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import useSound from "use-sound";
+import { setTodos } from "../../stores/todo";
+import { setMuted, setSort } from "../../stores/site";
 
-export const Header = ({
-  todos,
-  sortHandle,
-  deleteAllHandle,
-  muted,
-  setMuted,
-  sort,
-  importDataHandle,
-  exportDataHandle,
-}) => {
+export const Header = () => {
+  const dispatch = useDispatch();
+  const { muted, sort, volumes } = useSelector((state) => state.site);
+  const { todos } = useSelector((state) => state.todo);
+
   const inputFile = useRef(null);
+
+  const [playSort] = useSound("assets/sounds/sort.wav", {
+    volume: volumes.playSort,
+  });
+
+  const [playClearAll] = useSound("assets/sounds/clearAll.wav", {
+    volume: volumes.playClearAll,
+  });
+
+  const importDataHandle = (data) => {
+    dispatch(setTodos([...data, ...todos]));
+  };
+
+  const exportDataHandle = () => {
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(todos, null, 2)
+    )}`;
+
+    const link = document.createElement("a");
+    const date = new Date().toLocaleDateString().replace(/\//g, "-");
+    const time = new Date().toLocaleTimeString().replace(/[: ]/g, "-");
+
+    link.href = jsonString;
+    link.download = `todos-${date}-${time}.json`;
+    link.click();
+  };
 
   const handleChange = (e) => {
     const fileReader = new FileReader();
@@ -31,15 +56,55 @@ export const Header = ({
     };
   };
 
+  const sortHandle = () => {
+    if (!muted) {
+      playSort();
+    }
+    dispatch(
+      setTodos(
+        todos
+          .map((todo) => todo)
+          .sort((a, b) => {
+            if (sort === 1) {
+              if (!a.done && !b.done) {
+                dispatch(setSort(0));
+                return a.priority > b.priority
+                  ? 1
+                  : b.priority > a.priority
+                  ? -1
+                  : 0;
+              }
+            } else {
+              if (!a.done && !b.done) {
+                dispatch(setSort(1));
+                return b.priority > a.priority
+                  ? 1
+                  : a.priority > b.priority
+                  ? -1
+                  : 0;
+              }
+            }
+          })
+      )
+    );
+  };
+
+  const deleteAllHandle = () => {
+    if (!muted) {
+      playClearAll();
+    }
+    dispatch(setTodos([]));
+  };
+
   return (
     <div className={styles.header}>
       <h1 className={styles.h1}>TODO</h1>
       <div className={styles.buttons}>
         <span
           className={styles.icon}
-          onClick={() => setMuted(muted === 1 ? 0 : 1)}
+          onClick={() => dispatch(setMuted(muted === 1 ? 0 : 1))}
         >
-          {muted === 1 ? <FaVolumeMute size={20} /> : <FaVolumeUp size={20} />}
+          {muted ? <FaVolumeMute size={20} /> : <FaVolumeUp size={20} />}
         </span>
         <span
           className={classNames(styles.icon, {

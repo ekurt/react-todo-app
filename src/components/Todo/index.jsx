@@ -7,8 +7,15 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactCardFlip from "react-card-flip";
 import useSound from "use-sound";
 import ReactHtmlParser from "react-html-parser";
+import { useDispatch, useSelector } from "react-redux";
+import { setTodos } from "../../stores/todo";
+import { toast } from "react-toastify";
 
-export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
+export const Todo = ({ todo }) => {
+  const dispatch = useDispatch();
+  const { volumes, muted } = useSelector((state) => state.site);
+  const { todos } = useSelector((state) => state.todo);
+
   let todoItem = classNames(styles.todoItem, { [styles.done]: todo.done });
   let todoClass = classNames(
     styles.todo,
@@ -24,6 +31,14 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
     volume: volumes.playFlip,
   });
 
+  const [playCheck] = useSound("assets/sounds/check.wav", {
+    volume: volumes.playCheck,
+  });
+
+  const [playRemove] = useSound("assets/sounds/remove.wav", {
+    volume: volumes.playRemove,
+  });
+
   const priorities = ["Normal", "Low", "Medium", "High"];
 
   const convertTag = (todo) => {
@@ -32,18 +47,63 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
     );
   };
 
+  const notify = () => {
+    toast(`📋 Copied to clipboard!`, {
+      position: "top-right",
+      theme: "light",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const doneHandle = (id) => {
+    if (!muted) {
+      playCheck();
+    }
+    dispatch(
+      setTodos(
+        todos
+          .map((todo) => {
+            if (todo.id == id) {
+              return {
+                ...todo,
+                done: !todo.done,
+              };
+            }
+            return todo;
+          })
+          .sort((a, b) => (a.done > b.done ? 1 : b.done > a.done ? -1 : 0))
+      )
+    );
+  };
+
+  const deleteHandle = (id) => {
+    if (!muted) {
+      playRemove();
+    }
+    dispatch(setTodos(todos.filter((todo) => todo.id !== id)));
+  };
+
   return (
     <ReactCardFlip isFlipped={flip} flipDirection="vertical">
       <div
         className={todoClass}
         onContextMenuCapture={() => {
           setFlip(!flip);
-          playFlip();
+          if (!muted) {
+            playFlip();
+          }
         }}
         onTouchStartCapture={(e) => {
           if (e.touches.length === 2) {
             setFlip(!flip);
-            playFlip();
+            if (!muted) {
+              playFlip();
+            }
           }
         }}
       >
@@ -83,12 +143,16 @@ export const Todo = ({ todo, doneHandle, deleteHandle, notify, volumes }) => {
         className={todoClass}
         onContextMenuCapture={() => {
           setFlip(!flip);
-          playFlip();
+          if (!muted) {
+            playFlip();
+          }
         }}
         onTouchStartCapture={(e) => {
           if (e.touches.length === 2) {
             setFlip(!flip);
-            playFlip();
+            if (!muted) {
+              playFlip();
+            }
           }
         }}
       >
