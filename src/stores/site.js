@@ -4,9 +4,9 @@ const LOCAL_STORAGE_MUTED = "todo-app-muted";
 const LOCAL_STORAGE_SORTED = "todo-app-sorted";
 
 const values = {
-  "0": 0,
-  "1": 1
-}
+  0: 0,
+  1: 1,
+};
 
 export const siteSlice = createSlice({
   name: "site",
