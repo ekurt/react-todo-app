@@ -8,8 +8,9 @@
 
 ## ✨ Features
 
-- All data is stored in `Local Storage`
-- Import and Export todos
+- Data is storing in your browser `Local Storage` (when you're not login)
+- Data is storing in your Google account `Firebase` (when you're login)
+- Import and Export todos `.json`
 - Animate effects
 - Sound effects
 - Drag-Drop
@@ -24,6 +25,7 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
@@ -32,14 +34,17 @@
 
 - react
 - react-dom
+- react-redux
 - react-icons
 - react-toastify
 - react-card-flip
 - react-html-parser
 - react-beautiful-dnd
 - react-copy-to-clipboard
-- classnames
+- firebase
 - use-sound
+- classnames
+- @reduxjs/toolkit
 - @formkit/auto-animate
 
 ## ⚙️ Development
@@ -79,3 +84,7 @@ yarn build
 ```
 yarn preview
 ```
+
+## ⚠️ Warning
+
+#### Remember to rename the `.env.example` file to `.env` file and fill in the `.env` file.
