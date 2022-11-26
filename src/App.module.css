@@ -1,7 +1,7 @@
 .app {
-  @apply container mx-auto py-[50px] px-5 select-none;
+  @apply container mx-auto py-[50px] px-3 md:px-5 select-none;
 }
 
 .main {
-  @apply w-full lg:w-1/2 mx-auto flex flex-col my-[10px];
+  @apply w-full lg:w-2/3 xl:w-1/2 mx-auto flex flex-col my-[10px];
 }

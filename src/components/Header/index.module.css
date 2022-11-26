@@ -3,7 +3,7 @@
 }
 
 .h1 {
-  @apply flex justify-start items-center text-gray-100 tracking-[10px] text-4xl;
+  @apply flex justify-start items-center text-gray-100 tracking-[10px] text-3xl md:text-4xl;
   font-family: "Fredericka the Great", cursive;
 }
 
@@ -12,9 +12,25 @@
 }
 
 .icon {
-  @apply bg-dark px-3 py-2 border-l-2 border-light cursor-pointer;
+  @apply bg-dark px-[10px] md:px-3 py-[10px] md:py-2 border-l-2 border-light cursor-pointer;
 }
 
 .disabled {
-  @apply pointer-events-none;
+  @apply pointer-events-none text-gray-500;
+}
+
+.login {
+  @apply flex items-center gap-x-2 p-0 md:pr-2;
+}
+
+.img {
+  @apply w-10 md:w-9;
+}
+
+.name {
+  @apply hidden md:flex;
+}
+
+.message {
+  @apply w-full mt-1 text-white flex justify-start md:justify-end;
 }
