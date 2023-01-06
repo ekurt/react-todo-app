@@ -15,7 +15,7 @@
 }
 
 .todoItem {
-  @apply w-full break-words overflow-hidden;
+  @apply w-full break-words overflow-hidden leading-[1.8] md:leading-normal;
 }
 
 mark {
