@@ -18,6 +18,7 @@
 - Priority for todos
 - Tags for todos
 - Sorting
+- Auto link detect
 
 ## 💻 Tech Stack
 
@@ -41,9 +42,11 @@
 - react-html-parser
 - react-beautiful-dnd
 - react-copy-to-clipboard
+- linkify
 - firebase
 - use-sound
 - classnames
+- linkify-react
 - @reduxjs/toolkit
 - @formkit/auto-animate
 
