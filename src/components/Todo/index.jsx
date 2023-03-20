@@ -10,6 +10,7 @@ import ReactHtmlParser from "react-html-parser";
 import { useDispatch, useSelector } from "react-redux";
 import { setTodos } from "../../stores/todo";
 import { toast } from "react-toastify";
+import Linkify from "linkify-react";
 
 export const Todo = ({ todo }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,12 @@ export const Todo = ({ todo }) => {
   });
 
   const priorities = ["Normal", "Low", "Medium", "High"];
+
+  const linkifyOptions = {
+    attributes: {
+      target: "_blank",
+    },
+  };
 
   const convertTag = (todo) => {
     return ReactHtmlParser(
@@ -130,7 +137,9 @@ export const Todo = ({ todo }) => {
         )}
 
         <CopyToClipboard text={todo.todo} onCopy={notify}>
-          <span className={todoItem}>{convertTag(todo.todo)}</span>
+          <Linkify as="span" className={todoItem} options={linkifyOptions}>
+            {convertTag(todo.todo)}
+          </Linkify>
         </CopyToClipboard>
 
         <FaTimes

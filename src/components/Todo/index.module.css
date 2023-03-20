@@ -22,6 +22,30 @@ mark {
   @apply px-[5px] py-1 mx-[2px] bg-white text-dark font-bold;
 }
 
+mark a,
+mark a:link,
+mark a:active,
+mark a:visited {
+  @apply px-[5px] py-1 mx-[2px] bg-white !text-dark font-bold;
+}
+
+mark a:focus,
+mark a:hover {
+  @apply !text-blue-400;
+}
+
+.todoItem a,
+.todoItem a:link,
+.todoItem a:active,
+.todoItem a:visited {
+  @apply text-white;
+}
+
+.todoItem a:focus,
+.todoItem a:hover {
+  @apply text-blue-400;
+}
+
 .done {
   text-decoration-color: rgba(45, 194, 255, 1);
   text-decoration-line: line-through;
