@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCircleNotch } from "react-icons/fa";
+import { FaCircle, FaCircleNotch } from "react-icons/fa";
 import styles from "./index.module.css";
 import useSound from "use-sound";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ export const TodoForm = () => {
   const { priority, volumes, muted } = useSelector((state) => state.site);
   const { todos, todo } = useSelector((state) => state.todo);
 
+  const doneTodosLength = todos.filter((todo) => !todo.done).length;
   const [playCheck] = useSound("assets/sounds/check.wav", {
     volume: volumes.playCheck,
   });
@@ -69,7 +70,7 @@ export const TodoForm = () => {
     }
   };
 
-  const doneAllHandle = () => {
+  const doneAllHandle = (state) => {
     if (!muted) {
       playCheck();
     }
@@ -79,7 +80,7 @@ export const TodoForm = () => {
           .map((todo) => {
             return {
               ...todo,
-              done: true,
+              done: state,
             };
           })
           .sort((a, b) => (a.done > b.done ? 1 : b.done > a.done ? -1 : 0))
@@ -96,13 +97,23 @@ export const TodoForm = () => {
         </linearGradient>
       </svg>
       <form className={styles.form} onSubmit={submitHandle}>
-        <FaCircleNotch
-          size={30}
-          style={{ fill: "url(#gradient)" }}
-          className={styles.icon}
-          onClick={() => doneAllHandle()}
-          title="Check All"
-        />
+        {doneTodosLength > 0 ? (
+          <FaCircleNotch
+            size={30}
+            style={{ fill: "url(#gradient)" }}
+            className={styles.icon}
+            onClick={() => doneAllHandle(true)}
+            title="Check All"
+          />
+        ) : (
+          <FaCircle
+            size={30}
+            style={{ fill: "url(#gradient)" }}
+            className={styles.icon}
+            onClick={() => doneAllHandle(false)}
+            title="Uncheck All"
+          />
+        )}
         <input
           type="search"
           className={styles.input}
