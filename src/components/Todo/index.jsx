@@ -126,6 +126,7 @@ export const Todo = ({ todo }) => {
             style={{ fill: "url(#gradient)" }}
             className={styles.check}
             onClick={() => doneHandle(todo.id)}
+            title="Uncheck"
           />
         ) : (
           <FaRegCircle
@@ -133,6 +134,7 @@ export const Todo = ({ todo }) => {
             style={{ fill: "url(#gradient)" }}
             className={styles.check}
             onClick={() => doneHandle(todo.id)}
+            title="Check"
           />
         )}
 
@@ -146,6 +148,7 @@ export const Todo = ({ todo }) => {
           onClick={() => deleteHandle(todo.id)}
           size={15}
           className={styles.times}
+          title="Remove"
         />
       </div>
       <div

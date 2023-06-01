@@ -11,6 +11,10 @@ export const TodoForm = () => {
   const { priority, volumes, muted } = useSelector((state) => state.site);
   const { todos, todo } = useSelector((state) => state.todo);
 
+  const [playCheck] = useSound("assets/sounds/check.wav", {
+    volume: volumes.playCheck,
+  });
+
   const [playRemove] = useSound("assets/sounds/remove.wav", {
     volume: volumes.playRemove,
   });
@@ -65,6 +69,24 @@ export const TodoForm = () => {
     }
   };
 
+  const doneAllHandle = () => {
+    if (!muted) {
+      playCheck();
+    }
+    dispatch(
+      setTodos(
+        todos
+          .map((todo) => {
+            return {
+              ...todo,
+              done: true,
+            };
+          })
+          .sort((a, b) => (a.done > b.done ? 1 : b.done > a.done ? -1 : 0))
+      )
+    );
+  };
+
   return (
     <div className={styles.todoForm}>
       <svg width="0" height="0">
@@ -78,6 +100,8 @@ export const TodoForm = () => {
           size={30}
           style={{ fill: "url(#gradient)" }}
           className={styles.icon}
+          onClick={() => doneAllHandle()}
+          title="Check All"
         />
         <input
           type="search"

@@ -19,7 +19,7 @@
 }
 
 .todoItem span {
-  cursor: copy !important;
+  @apply cursor-copy;
 }
 
 mark {
