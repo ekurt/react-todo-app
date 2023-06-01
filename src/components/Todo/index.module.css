@@ -18,6 +18,10 @@
   @apply w-full break-words overflow-hidden leading-[1.8] md:leading-normal;
 }
 
+.todoItem span {
+  cursor: copy !important;
+}
+
 mark {
   @apply px-[5px] py-1 mx-[2px] bg-white text-dark font-bold;
 }
@@ -51,6 +55,10 @@ mark a:hover {
   text-decoration-line: line-through;
   text-decoration-style: wavy;
   text-decoration-thickness: 5px;
+}
+
+.done:hover {
+  text-decoration: none;
 }
 
 .check {

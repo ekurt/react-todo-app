@@ -137,8 +137,8 @@ export const Todo = ({ todo }) => {
         )}
 
         <CopyToClipboard text={todo.todo} onCopy={notify}>
-          <Linkify as="span" className={todoItem} options={linkifyOptions}>
-            {convertTag(todo.todo)}
+          <Linkify as="div" className={todoItem} options={linkifyOptions}>
+            <span>{convertTag(todo.todo)}</span>
           </Linkify>
         </CopyToClipboard>
 
