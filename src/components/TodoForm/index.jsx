@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCircle, FaCircleNotch } from "react-icons/fa";
+import { FaCircle, FaCircleNotch, FaDotCircle } from "react-icons/fa";
 import styles from "./index.module.css";
 import useSound from "use-sound";
 import { useDispatch, useSelector } from "react-redux";
@@ -88,6 +88,40 @@ export const TodoForm = () => {
     );
   };
 
+  let icon;
+
+  if (todos.length === 0) {
+    icon = (
+      <FaDotCircle
+        size={30}
+        style={{ fill: "url(#gradient)" }}
+        className={styles.icon}
+      />
+    );
+  } else {
+    if (doneTodosLength > 0) {
+      icon = (
+        <FaCircleNotch
+          size={30}
+          style={{ fill: "url(#gradient)" }}
+          className={styles.icon}
+          onClick={() => doneAllHandle(true)}
+          title="Check All"
+        />
+      );
+    } else {
+      icon = (
+        <FaCircle
+          size={30}
+          style={{ fill: "url(#gradient)" }}
+          className={styles.icon}
+          onClick={() => doneAllHandle(false)}
+          title="Uncheck All"
+        />
+      );
+    }
+  }
+
   return (
     <div className={styles.todoForm}>
       <svg width="0" height="0">
@@ -97,23 +131,7 @@ export const TodoForm = () => {
         </linearGradient>
       </svg>
       <form className={styles.form} onSubmit={submitHandle}>
-        {doneTodosLength > 0 ? (
-          <FaCircleNotch
-            size={30}
-            style={{ fill: "url(#gradient)" }}
-            className={styles.icon}
-            onClick={() => doneAllHandle(true)}
-            title="Check All"
-          />
-        ) : (
-          <FaCircle
-            size={30}
-            style={{ fill: "url(#gradient)" }}
-            className={styles.icon}
-            onClick={() => doneAllHandle(false)}
-            title="Uncheck All"
-          />
-        )}
+        {icon}
         <input
           type="search"
           className={styles.input}
