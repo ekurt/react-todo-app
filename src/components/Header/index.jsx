@@ -9,22 +9,16 @@ import {
   FaTrash,
   FaSortAmountDownAlt,
   FaSortAmountDown,
-  FaGoogle,
-  FaSignOutAlt,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 import { setTodos } from "../../stores/todo";
 import { setMuted, setSort } from "../../stores/site";
-import { loginAsync, logoutAsync } from "../../stores/user";
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const { muted, sort, volumes, sync, syncWait } = useSelector(
-    (state) => state.site
-  );
+  const { muted, sort, volumes } = useSelector((state) => state.site);
   const { todos } = useSelector((state) => state.todo);
-  const { user } = useSelector((state) => state.user);
 
   const inputFile = useRef(null);
 
@@ -102,21 +96,6 @@ export const Header = () => {
     dispatch(setTodos([]));
   };
 
-  const loginHandle = () => {
-    dispatch(loginAsync());
-  };
-
-  const logoutHandle = () => {
-    dispatch(logoutAsync());
-    setTimeout(() => {
-      dispatch(setTodos([]));
-    }, 1000);
-  };
-
-  const visitProfileHandle = () => {
-    window.open("https://myaccount.google.com/profile");
-  };
-
   return (
     <div className={styles.header}>
       <h1 className={styles.h1}>TODO</h1>
@@ -167,29 +146,6 @@ export const Header = () => {
         >
           <FaFileDownload size={20} title="Export" />
         </span>
-        {!user ? (
-          <span className={classNames(styles.icon)} onClick={loginHandle}>
-            <FaGoogle size={20} title="Login via Google" />
-          </span>
-        ) : (
-          <>
-            <span className={classNames(styles.icon)} onClick={logoutHandle}>
-              <FaSignOutAlt size={20} title="Logout" />
-            </span>
-            <span
-              className={classNames(styles.icon, styles.login)}
-              onClick={visitProfileHandle}
-            >
-              <img
-                className={styles.img}
-                src={user.photo}
-                alt={user.email}
-                title={user.email}
-              />
-              <span className={styles.name}>{user.name}</span>
-            </span>
-          </>
-        )}
       </div>
       <input
         type="file"
@@ -199,13 +155,7 @@ export const Header = () => {
         accept=".json"
         style={{ display: "none" }}
       />
-      <p className={styles.message}>
-        {user ? (
-          <>Data is storing in your Google account.</>
-        ) : (
-          <>Data is storing in your browser.</>
-        )}
-      </p>
+      <p className={styles.message}>Data is storing in your browser.</p>
     </div>
   );
 };
