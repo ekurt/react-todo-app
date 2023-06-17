@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Todo App",
+  "version": "1.0.2",
+  "description": "Easy, Featured, Responsive, Todo App.",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "favicon16.png",
+    "48": "favicon48.png",
+    "128": "favicon128.png"
+  }
+}

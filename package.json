@@ -26,15 +26,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 7362 --open",
-    "build": "vite build",
+    "build": "rimraf dist && vite build",
+    "build:zip": "yarn clean && yarn build && cd dist && zip -r ../v$(cat manifest.json | jq --raw-output .version).zip * && cd ..",
     "preview": "vite preview --host 0.0.0.0 --port 5000 --open",
+    "clean": "rimraf dist",
     "serve": "vite --port 7362"
   },
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.3",
     "@reduxjs/toolkit": "^1.9.0",
     "classnames": "^2.3.2",
-    "firebase": "^9.14.0",
     "linkify-react": "^4.1.0",
     "linkifyjs": "^4.1.0",
     "react": "^18.2.0",
@@ -54,8 +55,8 @@
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.11",
     "postcss": "^8.4.16",
+    "rimraf": "^5.0.1",
     "tailwindcss": "^3.1.8",
-    "vite": "^3.1.0",
-    "vite-plugin-pwa": "^0.16.4"
+    "vite": "^3.1.0"
   }
 }
