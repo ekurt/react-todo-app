@@ -6,6 +6,7 @@ import { setPriority, setVolumes } from "./stores/site";
 import { db } from "./config/firebase";
 import { ref, onValue, set } from "firebase/database";
 import { setTodos } from "./stores/todo";
+import { toast } from "react-toastify";
 
 const LOCAL_STORAGE_TODOS = "todo-app-todos";
 const LOCAL_STORAGE_MUTED = "todo-app-muted";
@@ -34,6 +35,30 @@ function App() {
     playSort: 0.25,
     playClearAll: 1,
   };
+
+  const Url = () => (
+    <a
+      href="https://chrome.google.com/webstore/detail/todo-app/hjcdimfjoiplgccjdnjfddnhpfedhemc"
+      target="_blank"
+    >
+      Have you tried our Chrome extension? Click for browse.
+    </a>
+  );
+
+  useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      toast(<Url />, {
+        position: "bottom-right",
+        theme: "light",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {
